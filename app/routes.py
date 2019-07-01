@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Created by zhangmin on 2019/6/28 14:37
 from app import app
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
 from app.forms import LoginForm
 
 @app.route('/')
@@ -28,5 +28,5 @@ def login():
     if form.validate_on_submit():
         flash('Login requested for use {}, remember_me={}'.format(
             form.username.data,form.remember_me.data))
-        return redirect('index')
+        return redirect(url_for('index'))
     return render_template('login.html',title='登录',form=form)
