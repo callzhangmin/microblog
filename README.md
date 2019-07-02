@@ -17,7 +17,8 @@
         u = User(username='susan', email='susan@example.com')
         db.session.add(u)
         db.session.commit()
-        ```
+```
+每次数据库被修改时，都需要生成数据库迁移。 flask db migrate -m "new fields in user model",表示在user表更新两个新的字段。
 4、Flask插件Flask-Login:管理用户登录状态，以便用户可以登录到应用，然后用户在导航到该应用的其他页面时，应用会“记得”该用户已经登录。它还提供了“记住我”的功能，允许用户在关闭浏览器窗口后再次访问应用时保持登录状态。<br>
     *用户模型上实现某些属性和方法,Flask-Login提供了一个叫做UserMixin的mixin类来将它们归纳其中<br>
     *is_authenticated: 一个用来表示用户是否通过登录认证的属性，用True和False表示。<br>

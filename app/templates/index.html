@@ -4,7 +4,7 @@
     <h1>Hi {{ current_user.username }}</h1>
     {% for post in posts %}
     <div>
-        <p>{{ post.author.username }}来着于小说<b>{{ post.body }}</b></p>
+        <p>《{{ post.body }}》的主角包含{{ post.author.username }}</p>
     </div>
     {% endfor %}
 {% endblock %}

@@ -7,7 +7,15 @@ from app.forms import LoginForm,RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
+from datetime import datetime
 
+
+#一旦某个用户向服务器发送请求，就将当前时间写入到这个字段。
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.now()
+        db.session.commit()
 
 #主页路由
 @app.route('/')
