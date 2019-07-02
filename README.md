@@ -1,18 +1,18 @@
-microblog
-========
-学习flask的记录，通过学习flask巩固python
-***
-*1、Flask提供了一个名为url_for()的函数，它使用URL到视图函数的内部映射关系来生成URL。 例如，url_for('login')返回/login，url_for('index')返回/index。url_for()的参数是endpoint名称，也就是视图函数的名字。
-*2、Python 定义了__str__()和__repr__()两种方法，__str__()用于显示给用户，而__repr__()用于显示给开发人员。
-        class Person(object):
-        def __init__(self, name, gender):
+#microblog#
+学习flask的记录，通过学习flask巩固python<br>
+1、Flask提供了一个名为url_for()的函数，它使用URL到视图函数的内部映射关系来生成URL。 例如，url_for('login')返回/login，url_for('index')返回/index。url_for()的参数是endpoint名称，也就是视图函数的名字。<br>
+2、Python 定义了__str__()和__repr__()两种方法，__str__()用于显示给用户，而__repr__()用于显示给开发人员。<br>
+'''
+    class Person(object):
+    def __init__(self, name, gender):
             self.name = name
             self.gender = gender
         def __str__(self):
             return '(Person: %s, %s)' % (self.name, self.gender)
             __repr__ = __str__
+'''
 3、对数据库的更改是在会话的上下文中完成的，你可以通过db.session进行访问验证。 允许在会话中累积多个更改，一旦所有更改都被注册，你可以发出一个指令db.session.commit()来以原子方式写入所有更改。 如果在会话执行的任何时候出现错误，调用db.session.rollback()会中止会话并删除存储在其中的所有更改。 要记住的重要一点是，只有在调用db.session.commit()时才会将更改写入数据库。 会话可以保证数据库永远不会处于不一致的状态。<br>
-添加另一个用户：
+添加另一个用户：<br>
         u = User(username='susan', email='susan@example.com')
         db.session.add(u)
         db.session.commit()
