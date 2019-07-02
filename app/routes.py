@@ -8,6 +8,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
 
+
+#主页路由
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -25,6 +27,7 @@ def index():
     return render_template('index.html',title='HELLO',posts=posts)
 
 
+#登录路由
 @app.route('/login', methods=['GET','POST'])
 def login():
     #如果已经登录
@@ -44,13 +47,14 @@ def login():
     return render_template('login.html',title='登录',form=form)
 
 
-
+#退出登录路由
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
 
+#注册路由
 @app.route('/register',methods=['GET','POST'])
 def register():
     if current_user.is_authenticated:
@@ -64,3 +68,14 @@ def register():
         flash('注册成功！')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+#个人主页
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'test1'},
+        {'author': user, 'body': 'test2'},
+    ]
+    return render_template('user.html',user=user,posts=posts)
